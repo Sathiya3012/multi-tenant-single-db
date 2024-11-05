@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Post;
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -12,7 +11,7 @@ class PostController extends Controller
     {
         return Post::all();
     }
-    
+
     public function create(Request $request)
     {
         $this->authorize('create', Post::class);
@@ -21,6 +20,7 @@ class PostController extends Controller
         $post->title = $request->input('title');
         $post->description = $request->input('description');
         $post->save();
+
         return response()->json($post, 201);
     }
 }

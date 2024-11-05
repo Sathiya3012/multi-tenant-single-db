@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -31,11 +31,12 @@ class LoginController extends Controller
         return response()->json(['message' => 'Invalid credentials'], 401);
     }
 
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         $request->user()->tokens()->delete();
 
         return [
-            'message' => 'Logged out successfully'
+            'message' => 'Logged out successfully',
         ];
     }
 }

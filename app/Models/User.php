@@ -6,13 +6,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 use Laravel\Sanctum\HasApiTokens;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use BelongsToTenant, HasFactory, Notifiable, HasApiTokens;
+    use BelongsToTenant, HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
