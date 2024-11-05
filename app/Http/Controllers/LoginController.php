@@ -20,12 +20,22 @@ class LoginController extends Controller
         if ($user && Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             Auth::login($user);
 
-            return response()->json([
+            $token = $user->createToken($user->id);
+
+            return [
                 'message' => 'Logged in successfully',
-                'tenant_id' => $user->tenant_id,
-            ]);
+                'token' => $token->plainTextToken,
+            ];
         }
 
         return response()->json(['message' => 'Invalid credentials'], 401);
+    }
+
+    public function logout(Request $request) {
+        $request->user()->tokens()->delete();
+
+        return [
+            'message' => 'Logged out successfully'
+        ];
     }
 }

@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Sathiya',
             'email' => 'sathiya@tecofize.com',
             'password' => Hash::make('password'),
-            'tenant_id' => 1
+            'tenant_id' => 1,
         ]);
 
         \App\Models\User::factory()->create([

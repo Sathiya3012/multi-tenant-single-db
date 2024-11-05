@@ -1,11 +1,16 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
-
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
 
 Route::post('/login', [LoginController::class, 'login']);
+
+Route::group([
+    'middleware' => ['auth:sanctum'],
+], function () {
+    Route::post('/logout', [LoginController::class, 'logout']);
+    Route::post('/post', [PostController::class, 'create']);
+    Route::get('/post', [PostController::class, 'index']);
+});
